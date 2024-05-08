@@ -51,7 +51,7 @@ void	ft_list_sort(t_list **begin_list, int (*cmp)())
 				ft_swap(previous, &outer, &inner);
 				if (outer == *begin_list)
 					*begin_list = inner;
-				printf("\t\t\tSwapped: inner = %s\n", inner ? (char *)inner->data : "NULL");
+				printf("\t\t\tSwapped: inner = %\n", inner ? (char *)inner->data : "NULL");
 				printf("\t\t\tSwapped: outer = %s\n", outer ? (char *)outer->data : "NULL");
 			}
 			inner = inner->next;

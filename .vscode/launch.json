@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/cpwong/dev/42/C12/ex12",
-      "program": "/home/cpwong/dev/42/C12/ex12/build/Debug/outDebug",
+      "cwd": "/home/cpwong/dev/42/C12/ex14",
+      "program": "/home/cpwong/dev/42/C12/ex14/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

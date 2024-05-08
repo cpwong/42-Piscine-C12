@@ -1,65 +1,85 @@
 #include "ft_list.h"
 
-void	ft_split_list(t_list *src, t_list **front, t_list **back)
+void	ft_print_list(t_list *head);
+
+void	ft_swap(t_list **head, t_list **n1, t_list **n2)
 {
-	t_list	*fast = src->next;
-	t_list	*slow = src;
+	t_list	*temp;
+	t_list	*prev;
 
-	printf("\tft_split_list...%s\n", src ? (char *)src->data : "-");
-	while (fast != NULL)
-	{
-		fast = fast->next;
-		if (fast != NULL)
-		{
-			slow = slow->next;
-			fast = fast->next;
-		}
-	}
-	*front = src;
-	*back = slow->next;
-	slow->next = NULL;
-}
-
-t_list	*ft_merge_list(t_list *n1, t_list *n2, int (*cmp)())
-{
-	t_list	*result;
-
-	printf("\tft_merge_list... %s, %s\n",
-		n1 ? (char *)n1->data : "-",
-		n2 ? (char *)n2->data : "-");
-	result = NULL;
-	if (!n1)
-		return (n2);
-	if (!n2)
-		return (n1);
-	if (cmp(n1->data, n2->data) < 0)
-	{
-		result = n1;
-		result->next = ft_merge_list(n1->next, n2, cmp);
-	}
+	printf("\tft_swap ...head = %s, n1 = %s, n2 = %s\n", 
+		*head ? (char *)(*head)->data : "NULL",
+		*n1 ? (char *)(*n1)->data : "NULL",
+		*n2 ? (char *)(*n2)->data : "NULL");
+	if (!head || !n1 || !n2)
+		return ;
+	if (*head == *n1)
+		prev = NULL;
 	else
 	{
-		result = n2;
-		result->next = ft_merge_list(n1, n2->next, cmp);
+		prev = *head;
+		while (prev->next != *n1)
+		{
+			prev = prev->next;
+		}
+		printf("\t\tprev = %s\n", prev ? (char *)prev->data : "-");
 	}
-	return (result);
-}
+	if (*n1 == *head)
+	{
+		*head = *n2;
+	}
+	else if (*n2 == *head)
+	{
+		*head = *n1;
+	}
+	if (prev)
+		prev->next = *n2;
+	(*n1)->next = (*n2)->next;
+	(*n2)->next = (*n1);
 
-t_list	*ft_do_sort(t_list *head, int (*cmp)())
-{
-	t_list	*left;
-	t_list	*right;
-
-	printf("ft_do_sort... %s\n", head ? (char *)head->data : "-");
-	if (!head || !head->next)
-		return head;
-	ft_split_list(head, &left, &right);
-	left = ft_do_sort(left, cmp);
-	right = ft_do_sort(right, cmp);
-	return (ft_merge_list(left, right, cmp));
+	temp = *n1;
+	*n1 = *n2;
+	*n2 = temp;
+	printf("\t\t...head = %s, n1 = %s, n2 = %s\n", 
+		*head ? (char *)(*head)->data : "NULL",
+		*n1 ? (char *)(*n1)->data : "NULL",
+		*n2 ? (char *)(*n2)->data : "NULL");
 }
 
 void	ft_list_sort(t_list **begin_list, int (*cmp)())
 {
-	*begin_list = ft_do_sort(*begin_list, cmp);
+	t_list	*sorted;
+	t_list	*this;
+	t_list	*next;
+	t_list	*temp;
+
+	if (!(*begin_list) || !(*begin_list)->next || !(cmp))
+		return ;
+	sorted = NULL;
+	this = *begin_list;
+	while (this)
+	{
+		next = this->next;
+		if (sorted == NULL || cmp(this->data, sorted->data) <= 0)
+		{
+			this->next = sorted;
+			sorted = this;
+		}
+		else
+		{
+			temp = sorted;
+			while (temp->next && cmp(this->data, temp->next->data) > 0)
+			{
+				temp = temp->next;
+			}
+			this->next = temp->next;
+			temp->next = this;
+		}
+		this = next;
+		printf("\t\tthis = %s, sorted = %s\n",
+			this ? (char *)this->data : "-",
+			sorted ? (char *)sorted->data : "-");	
+	}
+	*begin_list = sorted;
+
 }

@@ -1,7 +1,7 @@
 NAME = test
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 INCLUDES = ft_list.h
 FILES = main \

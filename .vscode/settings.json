@@ -8,14 +8,7 @@
   "C_Cpp_Runner.useMsvc": false,
   "C_Cpp_Runner.warnings": [
     "-Wall",
-    "-Wextra",
-    "-Wpedantic",
-    "-Wshadow",
-    "-Wformat=2",
-    "-Wcast-align",
-    "-Wconversion",
-    "-Wsign-conversion",
-    "-Wnull-dereference"
+    "-Wextra"
   ],
   "C_Cpp_Runner.msvcWarnings": [
     "/W4",
@@ -58,7 +51,7 @@
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
   "editor.indentSize": "tabSize",
   "editor.insertSpaces": false,
-  "editor.tabSize": 8,
+  "editor.tabSize": 4,
   "files.associations": {
     "*.ejs": "html",
     "ft_list.h": "c"
